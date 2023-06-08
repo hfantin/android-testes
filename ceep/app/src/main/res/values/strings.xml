@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Ceep</string>
+    <string name="titulo_insere_nota">Insere nota</string>
+    <string name="titulo_altera_nota">Altera nota</string>
+    <string name="titulos_notas">Notas</string>
+</resources>
