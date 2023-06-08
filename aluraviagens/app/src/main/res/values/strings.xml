@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Alura Viagens</string>
+    <string name="titulo_pacotes">Pacotes</string>
+    <string name="conteudo_do_banner_inicial">Banner inicial dos pacotes</string>
+    <string name="especiais">Especiais</string>
+    <string name="brasil">Brasil</string>
+    <string name="realizar_pagamento">REALIZAR PAGAMENTO</string>
+    <string name="resumo_pacote">Resumo do pacote</string>
+    <string name="preco_final">Preço final:</string>
+    <string name="imagem_do_pacote">Imagem do pacote</string>
+    <string name="digite_as_informa_es_do_cart_o_de_cr_dito_que_voc_deseja_usar_para_pagamento">Digite as informações do cartão de crédito que você deseja usar para pagamento</string>
+    <string name="valor_da_compra">Valor da compra:</string>
+    <string name="numero_do_cartao">Número do cartão</string>
+    <string name="valor_teste">R$ 421,50</string>
+    <string name="pagamento">Pagamento</string>
+    <string name="nome_no_cartao">Nome no cartão</string>
+    <string name="mascara_para_nome_no_cartao">abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ\u0020</string>
+    <string name="finalizar_compra">Finalizar compra</string>
+    <string name="cvc">CVC</string>
+    <string name="aa">AA</string>
+    <string name="mm">MM</string>
+    <string name="resumo_compra">Resumo da Compra</string>
+    <string name="parabens">Parabéns!</string>
+    <string name="compra_realizada_com_sucesso">Compra realizada com sucesso :)</string>
+    <string name="confira_o_resumo_da_compra">Confira o resumo da compra:</string>
+</resources>
