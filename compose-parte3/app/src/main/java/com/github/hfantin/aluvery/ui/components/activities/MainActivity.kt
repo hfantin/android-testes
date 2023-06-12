@@ -1,4 +1,4 @@
-package com.github.hfantin.aluvery
+package com.github.hfantin.aluvery.ui.components.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
