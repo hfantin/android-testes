@@ -15,7 +15,15 @@
         android:theme="@style/Theme.Aluvery"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.components.activities.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Aluvery">
+
+        </activity>
+
+        <activity
+            android:name=".ui.components.activities.ProdutoFormActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Aluvery">
