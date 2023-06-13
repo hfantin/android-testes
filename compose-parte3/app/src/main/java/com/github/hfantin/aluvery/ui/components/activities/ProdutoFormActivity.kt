@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -27,6 +29,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +40,7 @@ import com.github.hfantin.aluvery.R
 import com.github.hfantin.aluvery.model.Product
 import com.github.hfantin.aluvery.ui.theme.AluveryTheme
 import java.math.BigDecimal
+import java.text.DecimalFormat
 
 class ProdutoFormActivity : ComponentActivity() {
 
@@ -85,6 +91,10 @@ fun ProductFormScreen() {
             label = {
                 Text(text = "Url da imagem")
             },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Uri,
+                imeAction = ImeAction.Next
+            )
         )
 
         var name by remember { mutableStateOf("") }
@@ -94,16 +104,55 @@ fun ProductFormScreen() {
             label = {
                 Text(text = "Nome")
             },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next,
+                capitalization = KeyboardCapitalization.Words
+            )
         )
 
         var price by remember { mutableStateOf("") }
+//        val formatter = remember {
+//            DecimalFormat("#.##")
+//        }
+        var isPriceError by remember {
+            mutableStateOf(false)
+        }
         TextField(
-            price, onValueChange = { price = it },
+            price, onValueChange = {
+//                try {
+//                    price = formatter.format(BigDecimal(it))
+//                } catch (e: IllegalArgumentException) {
+//                    if (it.isEmpty()) {
+//                        price = it
+//                    }
+//                }
+                isPriceError = try {
+                    BigDecimal(it)
+                    false
+                } catch (e: IllegalArgumentException) {
+                    it.isNotEmpty()
+                }
+                price = it
+            },
             Modifier.fillMaxWidth(),
+            isError = isPriceError,
             label = {
                 Text(text = "Preço")
             },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Decimal,
+                imeAction = ImeAction.Next
+            )
         )
+        if (isPriceError) {
+            Text(
+                text = "Preço deve ser um número decimal",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.titleSmall, // caption,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
 
         var description by remember { mutableStateOf("") }
         TextField(
@@ -114,6 +163,11 @@ fun ProductFormScreen() {
             label = {
                 Text(text = "Descrição")
             },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Default,
+                capitalization = KeyboardCapitalization.Sentences
+            )
         )
 
         Button(
