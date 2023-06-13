@@ -1,15 +1,11 @@
 package com.github.hfantin.aluvery.ui.components
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +19,7 @@ import com.github.hfantin.aluvery.sampledata.sampleProducts
 import com.github.hfantin.aluvery.ui.theme.AluveryTheme
 
 @Composable
-fun ProductsSection(title: String, products: List<Product>, modifier: Modifier = Modifier,) {
+fun ProductsSection(title: String, products: List<Product>, modifier: Modifier = Modifier) {
     Column(modifier) {
         Text(
             text = title,
