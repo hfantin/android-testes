@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,7 +34,6 @@ import coil.compose.AsyncImage
 import com.github.hfantin.aluvery.R
 import com.github.hfantin.aluvery.model.Product
 import com.github.hfantin.aluvery.ui.theme.AluveryTheme
-import java.lang.NumberFormatException
 import java.math.BigDecimal
 
 class ProdutoFormActivity : ComponentActivity() {
