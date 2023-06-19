@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,6 +23,7 @@ import com.github.hfantin.aluvery.sampledata.sampleCandies
 import com.github.hfantin.aluvery.sampledata.sampleDrinks
 import com.github.hfantin.aluvery.sampledata.sampleSections
 import com.github.hfantin.aluvery.ui.screen.HomeScreen
+import com.github.hfantin.aluvery.ui.screen.HomeScreenUiState
 import com.github.hfantin.aluvery.ui.theme.AluveryTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +47,10 @@ class MainActivity : ComponentActivity() {
                     "Doces" to sampleCandies,
                     "Bebidas" to sampleDrinks
                 )
-                HomeScreen(sections = sections)
+                val state = remember {
+                    HomeScreenUiState()
+                }
+                HomeScreen(sections = sections, state = state)
             }
         }
     }
