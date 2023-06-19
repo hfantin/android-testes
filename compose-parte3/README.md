@@ -8,6 +8,7 @@
 - [compose playground](https://foso.github.io/Jetpack-Compose-Playground/cookbook/how_to_create_custom_shape/)
 - [lazy layouts](https://developer.android.com/jetpack/compose/lists)
 - [documentacao do google](https://developer.android.com/jetpack/compose)
+- [documentacao - estados](https://developer.android.com/jetpack/compose/state#managing-state)
 - [coil](https://coil-kt.github.io/coil/)
 - [compose states](https://developer.android.com/jetpack/compose/state)
 - [material design icons](https://fonts.google.com/icons)
