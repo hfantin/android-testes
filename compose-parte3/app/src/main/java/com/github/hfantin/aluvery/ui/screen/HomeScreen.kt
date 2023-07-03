@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.hfantin.aluvery.model.Product
+import com.github.hfantin.aluvery.sampledata.sampleCandies
+import com.github.hfantin.aluvery.sampledata.sampleDrinks
 import com.github.hfantin.aluvery.sampledata.sampleProducts
 import com.github.hfantin.aluvery.sampledata.sampleSections
 import com.github.hfantin.aluvery.ui.components.CardProductItem
@@ -27,32 +29,58 @@ import com.github.hfantin.aluvery.ui.theme.AluveryTheme
 
 class HomeScreenUiState(
     val sections: Map<String, List<Product>> = emptyMap(),
-    searchText: String = ""
+    val searchedProducts: List<Product> = emptyList(),
+    val searchText: String = "",
+    val onSearchChange: (String) -> Unit = {}
 ) {
+    fun isShowSections() = searchText.isBlank()
+}
 
-    var text by mutableStateOf(searchText)
+@Composable
+fun HomeScreen(products: List<Product>) {
+    val sections = mapOf(
+        "Todos produtos" to products,
+        "Promoções" to sampleDrinks + sampleCandies,
+        "Doces" to sampleCandies,
+        "Bebidas" to sampleDrinks
+    )
 
-    val searchedProducts
-        get() =
-            if (text.isNotBlank()) {
-                sampleProducts.filter { it.name.contains(text, ignoreCase = true) || it.description?.contains(text, ignoreCase = true) ?: false }
-            } else emptyList()
-
-    fun isShowSections() = text.isBlank()
-
-    val onSearchChange: (String) -> Unit = { searchText ->
-        text = searchText
+    var text by remember {
+        mutableStateOf("")
     }
+
+    fun containsInNameOrDescription() = { p: Product ->
+        p.name.contains(text, ignoreCase = true) || p.description?.contains(text, ignoreCase = true) ?: false
+    }
+
+    val searchedProducts = remember(text, products) {
+        if (text.isNotBlank()) {
+            sampleProducts.filter(containsInNameOrDescription()) // { it.name.contains(text, ignoreCase = true) || it.description?.contains(text, ignoreCase = true) ?: false }
+            products.filter(containsInNameOrDescription())
+        } else emptyList()
+    }
+
+
+    val state = remember(products, text) {
+        HomeScreenUiState(
+            sections = sections,
+            searchedProducts = searchedProducts,
+            searchText = text,
+            onSearchChange = {
+                text = it
+            }
+        )
+    }
+    HomeScreen(state = state)
 
 }
 
 @Composable
 fun HomeScreen(state: HomeScreenUiState = HomeScreenUiState()) {
     Column {
-        val text = state.text
-        val searchedProducts = remember(text) {
-            state.searchedProducts
-        }
+        val sections = state.sections
+        val text = state.searchText
+        val searchedProducts = state.searchedProducts
         SearchTextField(
             searchText = text,
             onSearchChange = state.onSearchChange,
@@ -61,17 +89,13 @@ fun HomeScreen(state: HomeScreenUiState = HomeScreenUiState()) {
                 .fillMaxWidth(),
         )
         LazyColumn(
-            Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(bottom = 16.dp)
+            Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(16.dp), contentPadding = PaddingValues(bottom = 16.dp)
         ) {
             if (state.isShowSections()) {
-                state.sections.forEach {
+                sections.forEach {
                     item {
                         ProductsSection(
-                            title = it.key,
-                            products = it.value
+                            title = it.key, products = it.value
                         )
                     }
                 }
@@ -101,8 +125,7 @@ fun HomeScreenWithSearchTextPreview() {
         Surface {
             HomeScreen(
                 state = HomeScreenUiState(
-                    searchText = "a",
-                    sections = sampleSections
+                    searchText = "a", sections = sampleSections
                 ),
             )
         }
