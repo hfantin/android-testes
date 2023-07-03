@@ -13,14 +13,15 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.hfantin.aluvery.dao.ProductDao
+import com.github.hfantin.aluvery.model.Product
 import com.github.hfantin.aluvery.sampledata.sampleCandies
 import com.github.hfantin.aluvery.sampledata.sampleDrinks
+import com.github.hfantin.aluvery.sampledata.sampleProducts
 import com.github.hfantin.aluvery.sampledata.sampleSections
 import com.github.hfantin.aluvery.ui.screen.HomeScreen
 import com.github.hfantin.aluvery.ui.screen.HomeScreenUiState
@@ -41,16 +42,8 @@ class MainActivity : ComponentActivity() {
                     )
                 )
             }) {
-                val sections = mapOf(
-                    "Todos produtos" to dao.products(),
-                    "Promoções" to sampleDrinks + sampleCandies,
-                    "Doces" to sampleCandies,
-                    "Bebidas" to sampleDrinks
-                )
-                val state = remember(sections) {
-                    HomeScreenUiState(sections)
-                }
-                HomeScreen(state = state)
+                val products = dao.products()
+                HomeScreen(products = products)
             }
         }
     }
